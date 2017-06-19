@@ -3,4 +3,7 @@
 *.pyo
 *.pkl
 
-/tests/*
+tests/*
+build/*
+dist/*
+PrisonerEconomy.egg-info/*
