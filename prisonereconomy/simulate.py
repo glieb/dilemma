@@ -1,4 +1,4 @@
-from prisonereconomy.economy import *
+from economy import *
 import sys
 import pickle
 

@@ -1,6 +1,6 @@
-from prisonereconomy.biases import *
-from prisonereconomy.config import max_mutation
-from prisonereconomy.movement import Point
+from biases import *
+from config import max_mutation
+from movement import Point
 
 
 # may want to add a mutate-able gene that affects mobility

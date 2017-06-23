@@ -1,6 +1,6 @@
 import math
 import random
-from prisonereconomy.config import max_movement
+from config import max_movement
 
 
 class Point:

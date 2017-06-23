@@ -1,13 +1,14 @@
 from random import randint
-from prisonereconomy.agent import *
+from agent import *
 from itertools import product
 import math
-import prisonereconomy.config as config
+import config
 
 
 class Economy:
     def __init__(self):
-        self.population = [generate_agent() for _ in range(config.starting_population)]
+        self.population = [
+                generate_agent() for _ in range(config.starting_population)]
         self.interactions = 0
         self.days = 0
         self.generations = 0
@@ -82,7 +83,8 @@ class Economy:
         for _ in range(self.days_per_generation):
             self.pass_day()
         for agent in self.population:
-            if agent.score >= self.score_cap and len(self.population) < self.max_population:
+            if (agent.score >= self.score_cap and 
+                    len(self.population) < self.max_population):
                 self.multiply(agent)
             elif agent.score <= self.score_min:
                 self.kill(agent)
