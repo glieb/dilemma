@@ -2,7 +2,8 @@ import pickle
 from biases import bias_dict
 
 
-def save_prototype(biases, file):
+def save_prototype(biases, filename):
+    open(filename, "w+")  # creates the file
     with open(file, "wb") as prototype:
         pickle.dump(biases, prototype)
 
@@ -30,7 +31,7 @@ if __name__ == "__main__":
     name = input(">>")
     if name == "EXIT":
         exit()
-    filename = "prototypes/" + name + ".pkl"
+    filename = "../prototypes/" + name + ".pkl"
     biases = {}
     for bias in bias_dict:
         biases[bias] = float(input(
