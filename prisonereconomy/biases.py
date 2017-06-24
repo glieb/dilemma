@@ -6,11 +6,12 @@ import attr
 @attr.s
 class Bias:
     value = attr.ib()
-    apply = attr.ib()
+    func = attr.ib()
 
 
 def generate_biases():
-    return {bias: Bias(bias_dict[bias][0](), bias_dict[bias][1]) for bias in bias_dict}
+    return {bias: Bias(bias_dict[bias][0](), bias_dict[bias][1]) 
+            for bias in bias_dict}
 
 
 def default_range():
@@ -22,12 +23,15 @@ def get_response(stakes, agent, other):
 
 
 def factor_biases(stakes, agent, other):
-    score = sum([agent.biases[bias].apply(stakes, agent, other) for bias in agent.biases])
+    score = sum([agent.biases[bias].apply(stakes, agent, other) 
+                 for bias in agent.biases])
     return score
 
 '''
-In order to apply each bias indiscriminately with one function, all apply functions must have access to all data
-available to _any_ bias, even if the apply function itself does not use all of its arguments.
+In order to apply each bias indiscriminately with one function, 
+all factoring  functions must have access to all data available to 
+_any_  bias, even if the factoring function itself does not use all
+of its arguments.
 '''
 
 
@@ -91,11 +95,14 @@ def factor_ctr_caution(stakes, agent, other):
     return total * agent.biases["ctr_caution"].value
 
 '''
-To add a bias to the existing structure, simply add it as a key to the dict below, along with a pair representing
-the function used to retrieve initial values for randomly generated agents, as well as the function used to apply
-the bias to a decision.
+To add a bias to the existing structure, simply add it as a 
+key to the dict below, along with a pair consisting of
+the function used to retrieve initial values for randomly 
+generated agents, as well as the function used to factor
+the bias into a decision score.
 
-Both functions in each of these pairs should typically return values in the range of -1.0 and 1.0.
+Both functions in each of these pairs should typically 
+return values in the range of -1.0 and 1.0.
 '''
 
 bias_dict = {
