@@ -1,8 +1,9 @@
 from random import randint
-from agent import *
 from itertools import product
 import math
 import config
+from agent import *
+from stakes import Stakes
 
 
 class Economy:
@@ -46,7 +47,7 @@ class Economy:
         e = randint(1, f)
         h = randint(self.lowest_stakes, e)
         g = randint(self.lowest_stakes, h)
-        return stakes_tuple(a, b, c, d, e, f, g, h)
+        return Stakes(a, b, c, d, e, f, g, h)
 
     def distance_function(self, distance):
         if distance == 0:
@@ -64,8 +65,8 @@ class Economy:
             self.raw_history.append(b_response)
             a.memorize(b, Memory(stakes, a_response, b_response))
             b.memorize(a, Memory(stakes, b_response, a_response))
-            a_result = stakes[a_response][b_response][0]
-            b_result = stakes[a_response][b_response][1]
+            a_result = stakes[a_response][b_response][True]
+            b_result = stakes[a_response][b_response][False]
             a.score += a_result
             b.score += b_result
             a.move(b, b_response)
@@ -83,7 +84,8 @@ class Economy:
         for _ in range(self.days_per_generation):
             self.pass_day()
         for agent in self.population:
-            if (agent.score >= self.score_cap and 
+            if (agent.score >= self.score_cap
+                    and
                     len(self.population) < self.max_population):
                 self.multiply(agent)
             elif agent.score <= self.score_min:
@@ -101,17 +103,3 @@ class Economy:
             self.purge()
         for _ in range(quantity):
             self.population.append(Agent(prototype))
-
-
-def stakes_tuple(a, b, c, d, e, f, g, h):
-    # ordered so that the tuple can be navigated with True/False values
-    stakes = (((d, h), (c, g)), ((b, f), (a, e)))
-    return stakes
-
-
-def print_stakes(stakes):
-    # update with string.format later
-    print("CC: ", stakes[1][1])
-    print("CD: ", stakes[1][0])
-    print("DC: ", stakes[0][1])
-    print("DC: ", stakes[0][0])
