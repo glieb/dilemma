@@ -11,7 +11,7 @@ class Bias:
 
 
 def generate_biases():
-    return {bias: Bias(bias_dict[bias][0](), bias_dict[bias][1]) 
+    return {bias: Bias(bias_dict[bias][0](), bias_dict[bias][1])
             for bias in bias_dict}
 
 
@@ -24,15 +24,19 @@ def get_response(stakes, agent, other):
 
 
 def factor_biases(stakes, agent, other):
-    score = sum([agent.biases[bias].apply(stakes, agent, other) 
+    score = sum([agent.biases[bias].apply(stakes, agent, other)
                  for bias in agent.biases])
     return score
 
 '''
-In order to apply each bias indiscriminately with one function, 
-all factoring  functions must have access to all data available to 
+In order to apply each bias indiscriminately with one function,
+all factoring  functions must have access to all data available to
 _any_  bias, even if the factoring function itself does not use all
 of its arguments.
+
+In other words, all factoring functions must include arguments
+(stakes, agent, other), as the simulator will try to pass those
+arguments in whether you like it or not.
 '''
 
 
@@ -72,52 +76,76 @@ def factor_history(stakes, agent, other):
     return history * agent.biases["history"].value
 
 
+'''
+The below factors may be referred to as "selfish factors", as they
+are primarily used to either take advantage of a naive opponent or
+to defend against an aggressor. In essence, each of the following
+four functions factors the advantage of defecting in various
+scenarios.
+
+The comments denoting which values are being subtracted from each
+other to determine the "total" value (typically negative) come from
+two table of possibilities defined below.
+
+Points for Agent
+a = agent cooperates, other cooperates
+b = agent cooperates, other defects
+c = agent defects, other cooperates
+d = agent defects, other defects
+
+Points for Other
+e = other cooperates, agent cooperates
+f = other cooperates, agent defects
+g = other defects, agent cooperates
+h = other defects, agent defects
+'''
+
 def factor_ambition(stakes, agent, other):
     # assumes the opponent cooperates, factors advantage from defecting
-    total = stakes[0][0][0] - stakes[1][0][0]  # a - c
+    total = stakes.a - stakes.c
     return total * agent.biases["ambition"].value
 
 
 def factor_caution(stakes, agent, other):
     # assumes the opponent defects, factors disadvantage from cooperating
-    total = stakes[0][1][0] - stakes[1][1][0]  # b - d
+    total = stakes.b - stakes.d
     return total * agent.biases["caution"].value
 
 
 def factor_ctr_ambition(stakes, agent, other):
-    # assumes cooperation, factors opponent's advantage from defecting
-    total = stakes[0][0][1] - stakes[0][1][1]  # e - f
+    # assumes own cooperation, factors opponent's advantage from defecting
+    total = stakes.e - stakes.g
     return total * agent.biases["ctr_ambition"].value
 
 
 def factor_ctr_caution(stakes, agent, other):
-    # assumes defection, factors opponent's disadvantage from cooperating
-    total = stakes[1][0][1] - stakes[1][1][1]  # g - h
+    # assumes own defection, factors opponent's disadvantage from cooperating
+    total = stakes.f - stakes.h
     return total * agent.biases["ctr_caution"].value
 
 '''
-To add a bias to the existing structure, simply add it as a 
+To add a bias to the existing structure, simply add it as a
 key to the dict below, along with a pair consisting of
-the function used to retrieve initial values for randomly 
+the function used to retrieve initial values for randomly
 generated agents, as well as the function used to factor
 the bias into a decision score.
 
-Both functions in each of these pairs should typically 
+Both functions in each of these pairs should typically
 return values in the range of -1.0 and 1.0.
 
 The global bias dict is represented as an ordered dict
-to main tain the order in which the keys were added.
+to maintain the order in which the keys were added.
 This is useful, for example, when creating new prototypes,
 as the order of factors only needs to be defined once.
 '''
 
 bias_dict = OrderedDict([])
-bias_dict["trust"] = (default_range, factor_trust),
-bias_dict["reciprocity"] = (random, factor_reciprocity),
-bias_dict["distance"] = (default_range, factor_distance),
-bias_dict["similarity"] = (default_range, factor_similarity),
-bias_dict["history"] = (random, factor_trust),
-bias_dict["ambition"] = (random, factor_ambition),
-bias_dict["caution"] = (random, factor_caution),
-bias_dict["ctr_ambition"] = (random, factor_ctr_ambition),
-bias_dict["ctr_caution"] = (random, factor_ctr_ambition),
+bias_dict["trust"] = (default_range, factor_trust)
+bias_dict["reciprocity"] = (random, factor_reciprocity)
+bias_dict["distance"] = (default_range, factor_distance)
+bias_dict["similarity"] = (default_range, factor_similarity)
+bias_dict["history"] = (random, factor_trust)
+bias_dict["ambition"] = (random, factor_ambition)
+bias_dict["caution"] = (random, factor_caution)
+bias_dict["ctr_ambition"] = (random, factor_ctr_ambition)
+bias_dict["ctr_caution"] = (random, factor_ctr_ambition)
