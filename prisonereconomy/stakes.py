@@ -8,13 +8,13 @@ corresponding points value.
 
 The single letter variables are defined as follows:
 
-Rewards for Agent:
+Points for Agent:
 a = agent cooperates, other cooperates
 b = agent cooperates, other defects
 c = agent defects, other cooperates
 d = agent defects, other defects
 
-Rewards for Other
+Points for Other
 e = other cooperates, agent cooperates
 f = other cooperates, agent defects
 g = other defects, agent cooperates
@@ -51,7 +51,7 @@ class Stakes(object):
         self.f = f
         self.g = g
         self.h = h
-        self.tuple_form = (((h, d), (g, c)), ((f, b), (e, a)))
+        self.tuple_form = (((h, d), (f, c)), ((g, b), (e, a)))
 
     def __repr__(self):
         return str(dict(
