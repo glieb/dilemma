@@ -1,5 +1,6 @@
 from random import uniform, random
 from math import sqrt
+from collections import OrderedDict
 import attr
 
 
@@ -105,7 +106,7 @@ Both functions in each of these pairs should typically
 return values in the range of -1.0 and 1.0.
 '''
 
-bias_dict = {
+bias_dict = OrderedDict([
     "trust": (default_range, factor_trust),
     "reciprocity": (random, factor_reciprocity),
     "distance": (default_range, factor_distance),
@@ -115,4 +116,4 @@ bias_dict = {
     "caution": (random, factor_caution),
     "ctr_ambition": (random, factor_ctr_ambition),
     "ctr_caution": (random, factor_ctr_ambition),
-    }
+    ])
