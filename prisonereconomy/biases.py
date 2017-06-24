@@ -104,16 +104,20 @@ the bias into a decision score.
 
 Both functions in each of these pairs should typically 
 return values in the range of -1.0 and 1.0.
+
+The global bias dict is represented as an ordered dict
+to main tain the order in which the keys were added.
+This is useful, for example, when creating new prototypes,
+as the order of factors only needs to be defined once.
 '''
 
-bias_dict = OrderedDict([
-    "trust": (default_range, factor_trust),
-    "reciprocity": (random, factor_reciprocity),
-    "distance": (default_range, factor_distance),
-    "similarity": (default_range, factor_similarity),
-    "history": (random, factor_trust),
-    "ambition": (random, factor_ambition),
-    "caution": (random, factor_caution),
-    "ctr_ambition": (random, factor_ctr_ambition),
-    "ctr_caution": (random, factor_ctr_ambition),
-    ])
+bias_dict = OrderedDict([])
+bias_dict["trust"] = (default_range, factor_trust),
+bias_dict["reciprocity"] = (random, factor_reciprocity),
+bias_dict["distance"] = (default_range, factor_distance),
+bias_dict["similarity"] = (default_range, factor_similarity),
+bias_dict["history"] = (random, factor_trust),
+bias_dict["ambition"] = (random, factor_ambition),
+bias_dict["caution"] = (random, factor_caution),
+bias_dict["ctr_ambition"] = (random, factor_ctr_ambition),
+bias_dict["ctr_caution"] = (random, factor_ctr_ambition),
