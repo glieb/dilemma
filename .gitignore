@@ -1,4 +1,5 @@
 .idea/
+.atom/
 *.pyc
 *.pyo
 *.pkl
