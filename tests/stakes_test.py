@@ -23,6 +23,15 @@ def main(iterations):
         assert stakes.g >= 0
         assert stakes.a >= 0
         assert stakes.e >= 0
+        assert stakes[1][1][1] == stakes.a
+        assert stakes[1][0][1] == stakes.b
+        assert stakes[0][1][1] == stakes.c
+        assert stakes[0][0][1] == stakes.d
+        assert stakes[1][1][0] == stakes.e
+        assert stakes[0][1][0] == stakes.f
+        assert stakes[1][0][0] == stakes.g
+        assert stakes[0][0][0] == stakes.h
+
     print("stakes test successful")
 
 
