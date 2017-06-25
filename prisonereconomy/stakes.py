@@ -56,7 +56,7 @@ class Stakes(object):
         self.tuple_form = (((h, d), (f, c)), ((g, b), (e, a)))
 
     def __repr__(self):
-        return str(sorted({
+        return str({
             "a": self.a,
             "b": self.b,
             "c": self.c,
@@ -65,7 +65,7 @@ class Stakes(object):
             "f": self.f,
             "g": self.g,
             "h": self.h,
-        }))
+        })
 
     def __getitem__(self, i):
         return self.tuple_form.__getitem__(i)
