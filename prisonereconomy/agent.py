@@ -11,7 +11,7 @@ class Agent:
         self.memories = {}
         self.score = 0
         self.location = Point((random(), random()))
-        
+
     def memorize(self, other, memory):
         if other in self.memories:
             self.memories[other].append(memory)
@@ -37,7 +37,7 @@ class Agent:
         return child
 
     def move(self, other, toward):
-        self.location.move(other, toward)
+        self.location.move(other.location, toward)
 
 
 class Memory:
