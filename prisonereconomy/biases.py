@@ -78,14 +78,14 @@ def factor_history(stakes, agent, other):
 
 '''
 The below factors may be referred to as "selfish factors", as they
-are primarily used to either take advantage of a naive opponent or
+are primarily used to either take advantage of a naive partner or
 to defend against an aggressor. In essence, each of the following
 four functions factors the advantage of defecting in various
 scenarios.
 
 The comments denoting which values are being subtracted from each
 other to determine the "total" value (typically negative) come from
-two table of possibilities defined below.
+the two tables of possibilities defined below.
 
 Points for Agent
 a = agent cooperates, other cooperates
