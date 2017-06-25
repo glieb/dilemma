@@ -56,7 +56,7 @@ class Stakes(object):
         self.tuple_form = (((h, d), (f, c)), ((g, b), (e, a)))
 
     def __repr__(self):
-        return str(dict(
+        return str(sorted({
             "a": self.a,
             "b": self.b,
             "c": self.c,
@@ -65,7 +65,7 @@ class Stakes(object):
             "f": self.f,
             "g": self.g,
             "h": self.h,
-        ))
+        }))
 
     def __getitem__(self, i):
         return self.tuple_form.__getitem__(i)
@@ -73,14 +73,14 @@ class Stakes(object):
 
 def generate_stakes(lowest, highest):
     # c >= a >= d >= b
-    # f > = e >= h >= g
-    # c > 0, g > 0, a > 0, e > 0
-    c = randint(1, highest)
-    a = randint(1, c)
+    # g > = e >= h >= f
+    # c >= 0, g >= 0, a >= 0, e >= 0
+    c = randint(0, highest)
+    a = randint(0, c)
     d = randint(lowest, a)
     b = randint(lowest, d)
-    f = randint(1, highest)
-    e = randint(1, f)
+    g = randint(0, highest)
+    e = randint(0, g)
     h = randint(lowest, e)
-    g = randint(lowest, h)
+    f = randint(lowest, h)
     return Stakes(a, b, c, d, e, f, g, h)
