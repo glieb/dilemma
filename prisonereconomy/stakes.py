@@ -29,7 +29,7 @@ the results of a dilemma.
 The order of booleans is defined as follows:
 
 1st = True if agent cooperates, False if agent defects
-2nd = True of other cooperates, False if other defects
+2nd = True if other cooperates, False if other defects
 3rd = True if calculating reward for agent,
       False if calculating reward for other
 
