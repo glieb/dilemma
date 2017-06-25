@@ -25,8 +25,9 @@ class Point:
 
     def move(self, point, toward):
         move_distance = random.uniform(0, max_movement)
-        if move_distance > (distance(self, point) / 2.0) and toward:  # if trying to move past the midpoint
-            move_distance = distance(self, point) / 2.0               # move to the midpoint instead
+        # if trying to move past the midpoint, move to the midpoint instead
+        if move_distance > (distance(self, point) / 2.0) and toward:
+            move_distance = distance(self, point) / 2.0
         angle = math.atan2(point.y() - self.y(), point.x() - self.x())
         if not toward:
             angle += math.pi  # reverse angle
