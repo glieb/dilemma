@@ -31,7 +31,6 @@ def main(iterations):
         assert stakes[0][1][0] == stakes.f
         assert stakes[1][0][0] == stakes.g
         assert stakes[0][0][0] == stakes.h
-
     print("stakes test successful")
 
 
