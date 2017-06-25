@@ -24,7 +24,7 @@ def get_response(stakes, agent, other):
 
 
 def factor_biases(stakes, agent, other):
-    score = sum([agent.biases[bias].apply(stakes, agent, other)
+    score = sum([agent.biases[bias].func(stakes, agent, other)
                  for bias in agent.biases])
     return score
 
