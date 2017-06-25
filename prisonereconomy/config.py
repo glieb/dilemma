@@ -1,8 +1,8 @@
 from configparser import ConfigParser
 
 config = ConfigParser()
-config.read("config.ini")
-econ = config["DEFAULT"]
+config.read("../config.ini")
+econ = config["general"]
 adv = config["advanced"]
 
 starting_population = econ.getint("starting_population")
