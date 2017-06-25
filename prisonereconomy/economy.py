@@ -3,7 +3,7 @@ from itertools import product
 import math
 import config
 from agent import *
-from stakes import Stakes
+from stakes import Stakes, generate_stakes
 
 
 class Economy:
@@ -35,20 +35,6 @@ class Economy:
         self.population.append(child_b)
         print("agent multiplied")
 
-    def generate_stakes(self):
-        # c >= a >= d >= b
-        # f > = e >= h >= g
-        # c > 0, g > 0, a > 0, e > 0
-        c = randint(1, self.highest_stakes)
-        a = randint(1, c)
-        d = randint(self.lowest_stakes, a)
-        b = randint(self.lowest_stakes, d)
-        f = randint(1, self.highest_stakes)
-        e = randint(1, f)
-        h = randint(self.lowest_stakes, e)
-        g = randint(self.lowest_stakes, h)
-        return Stakes(a, b, c, d, e, f, g, h)
-
     def distance_function(self, distance):
         if distance == 0:
             return math.inf
@@ -58,7 +44,7 @@ class Economy:
         distance = sqrt(abs(((a.location[0] - b.location[0]) ** 2) -
                             ((a.location[1] - b.location[1]) ** 2)))
         if random() <= self.distance_function(distance):
-            stakes = self.generate_stakes()
+            stakes = generate_stakes(self.lowest_stakes, self.highest_stakes)
             a_response = get_response(stakes, a, b)
             b_response = get_response(stakes, b, a)
             self.raw_history.append(a_response)

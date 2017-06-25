@@ -41,6 +41,8 @@ not they cooperated, as well as whether they are the initiator of
 the dilemma in question.
 '''
 
+from random import randint
+
 class Stakes(object):
     def __init__(self, a, b, c, d, e, f, g, h):
         self.a = a
@@ -67,3 +69,18 @@ class Stakes(object):
 
     def __getitem__(self, i):
         return self.tuple_form.__getitem__(i)
+
+
+def generate_stakes(lowest, highest):
+    # c >= a >= d >= b
+    # f > = e >= h >= g
+    # c > 0, g > 0, a > 0, e > 0
+    c = randint(1, highest)
+    a = randint(1, c)
+    d = randint(lowest, a)
+    b = randint(lowest, d)
+    f = randint(1, highest)
+    e = randint(1, f)
+    h = randint(lowest, e)
+    g = randint(lowest, h)
+    return Stakes(a, b, c, d, e, f, g, h)
