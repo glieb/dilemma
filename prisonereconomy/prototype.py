@@ -4,7 +4,7 @@ from biases import bias_dict
 
 def save_prototype(biases, filename):
     open(filename, "w+")  # creates the file
-    with open(file, "wb") as prototype:
+    with open(filename, "wb") as prototype:
         pickle.dump(biases, prototype)
 
 
@@ -27,7 +27,7 @@ def check_biases(biases):
 
 
 if __name__ == "__main__":
-    print("Enter the name of your new prototype, or EXIT to cancel.") 
+    print("Enter the name of your new prototype, or EXIT to cancel.")
     name = input(">>")
     if name == "EXIT":
         exit()
