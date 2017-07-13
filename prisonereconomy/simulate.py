@@ -1,15 +1,16 @@
-from economy import *
+from economy import Economy
 import sys
 import pickle
 
 
 def main(argv):  # take pkd and int as arguments
-    filename = "savedata/" + argv[1]
+    filename = "../savedata/" + argv[1] + ".pkl"
     try:
         with open(filename, "rb") as load_file:
             economy = pickle.load(load_file)
     except FileNotFoundError:
         economy = Economy()
+        open(filename, "w+")
     try:
         generations = int(argv[2])
     except ValueError:
