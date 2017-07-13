@@ -1,5 +1,6 @@
-from economy import Economy
 import sys
+sys.path.append("")
+from economy import Economy
 import pickle
 import config
 
