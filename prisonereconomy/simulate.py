@@ -1,6 +1,7 @@
 from economy import Economy
 import sys
 import pickle
+import config
 
 
 def main(argv):  # take pkd and int as arguments
