@@ -1,5 +1,5 @@
 import sys
-sys.path.append("..")
+sys.path.append("../prisonereconomy")
 from economy import Economy
 import pickle
 import config
