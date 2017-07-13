@@ -82,7 +82,7 @@ class Economy:
         print("generation passed")
 
     def purge(self):
-        self.population = self.population[(self.max_population / 2):]
+        self.population = self.population[(self.max_population // 2):]
 
     def invade(self, prototype, quantity):
         while len(self.population) + quantity > self.max_population:
