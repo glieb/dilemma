@@ -1,22 +1,19 @@
+from prisonereconomy.economy import *
 import sys
-sys.path.append("../prisonereconomy")
-from economy import Economy
 import pickle
-import config
 
 
 def main(argv):  # take pkd and int as arguments
-    filename = "../savedata/" + argv[1] + ".pkl"
+    filename = "savedata/" + argv[1]
     try:
         with open(filename, "rb") as load_file:
             economy = pickle.load(load_file)
     except FileNotFoundError:
         economy = Economy()
-        open(filename, "w+")
     try:
         generations = int(argv[2])
     except ValueError:
-        print("Error: Invalid input: " + argv[2])
+        print("Error: Invalid input")
         return
     while generations > 0:
         economy.pass_generation()
