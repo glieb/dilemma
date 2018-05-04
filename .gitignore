@@ -6,6 +6,6 @@
 
 build/*
 dist/*
-PrisonerEconomy.egg-info/*
+dilemma.egg-info/*
 
 todo.txt

@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..")
-from prisonereconomy.stakes import generate_stakes
-from prisonereconomy.config import lowest_stakes, highest_stakes
+from dilemma.stakes import generate_stakes
+from dilemma.config import lowest_stakes, highest_stakes
 
 
 def main(iterations):

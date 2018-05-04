@@ -1,6 +1,6 @@
 import pickle
 import sys
-sys.path.append("../prisonereconomy")
+sys.path.append("../dilemma")
 from biases import bias_dict
 
 

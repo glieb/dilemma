@@ -1,4 +1,4 @@
-from prisonereconomy.movement import *
+from dilemma.movement import *
 import random
 
 
