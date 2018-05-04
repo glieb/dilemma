@@ -1,5 +1,5 @@
 import pickle
-from dilemma.biases import bias_dict
+from biases import bias_dict
 
 
 def save_prototype(biases, file):
