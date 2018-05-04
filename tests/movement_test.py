@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from dilemma.movement import *
 import random
 
