@@ -32,5 +32,6 @@ if __name__ == "__main__":
     filename = "prototypes/" + name + ".pkl"
     biases = {}
     for bias in bias_dict:
-        biases[bias] = float(input("Enter {} value for {}:  ".format(bias, name)))
+        output_string = "Enter {} value for {}:  ".format(bias, name)
+        biases[bias] = float(input(output_string))
     save_prototype(biases, filename)
