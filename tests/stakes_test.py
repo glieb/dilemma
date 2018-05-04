@@ -35,4 +35,4 @@ def main(iterations):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(10)
